@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.magikelle.godotgoogleplaybilling">
+
+    <application>
+        <meta-data
+            android:name="org.godotengine.plugin.v1.GodotGooglePlayBilling"
+            android:value="com.magikelle.godotgoogleplaybilling.GodotGooglePlayBilling" />
+    </application>
+
+</manifest>
