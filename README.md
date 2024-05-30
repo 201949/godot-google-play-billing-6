@@ -96,9 +96,9 @@ func _on_product_details_query_completed(sku_details):
 		match available_sku["productId"]:
 			"purchase1":
 				var ads_remove_price = available_sku["price"]
-      "purchase2":
+			"purchase2":
 				var ads_remove_price = available_sku["price"]
-      "purchase3":
+			"purchase3":
 				var ads_remove_price = available_sku["price"]
 
 func _on_product_details_query_error(code, message):
