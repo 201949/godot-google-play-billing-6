@@ -15,11 +15,7 @@ Follow these instruction: [ official documentation](https://docs.godotengine.org
 
 In short follow these steps:
 
-1. Download [ AAR library for Android plugins](https://godotengine.org/download/windows "Godot download").
-
-2. Copy .aar file to *godot-lib.release/* and rename it to *godot-lib.release.aar*
-
-3. Compile the project:
+1. Compile the project:
 
 	Open command window and *cd* into *PGSGP* direcory and run command below
 	
@@ -31,7 +27,7 @@ In short follow these steps:
 	
 		./gradlew build
 	
-4. Copy the newly created .aar and .gdap files to your plugin directory:
+2. Copy the newly created .aar and .gdap files to your plugin directory:
 
 *app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar to *[your godot project]/android/plugins/*
 *GodotGooglePlayBilling.gdap to *[your godot project]/android/plugins/*
