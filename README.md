@@ -117,10 +117,10 @@ func _on_purchases_updated(purchases):
 	purchased_inapp = to_buy_item
 	for purchase in purchases:
 		if not purchase.is_acknowledged:
-			# payment.consumePurchase(purchase.purchase_token) # многоразовая покупка
-			payment.acknowledgePurchase(purchase.purchase_token) # одноразовая покупка
+			# payment.consumePurchase(purchase.purchaseToken) # многоразовая покупка
+			payment.acknowledgePurchase(purchase.purchaseToken) # одноразовая покупка
 	if purchases.size() > 0:
-		test_item_purchase_token = purchases[purchases.size() - 1].purchase_token
+		test_item_purchase_token = purchases[purchases.size() - 1].purchaseToken
 
 var purchased_inapp:String
 # одноразовые покупки
