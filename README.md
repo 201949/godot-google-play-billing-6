@@ -32,6 +32,17 @@ In short follow these steps:
 *app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar to *[your godot project]/android/plugins/*
 *GodotGooglePlayBilling.gdap to *[your godot project]/android/plugins/*
 
+### Preparing the Editor and Project for Plugin Use
+
+1. First, check the export template settings for Android. You need to specify a minimum SDK version of 21 there.
+
+![336757830-aa3a2889-3bee-43f9-be1c-372c3dc675ca](https://github.com/201949/godot-google-play-billing-6/assets/70590729/048e6a7c-7ea6-4903-9877-d83796efe122)
+
+2. Secondly, check the \android\build\config.gradle file and make the necessary changes to the SDK version specification if needed.
+
+![336747031-30146e41-1d66-4574-8354-4777494662b3](https://github.com/201949/godot-google-play-billing-6/assets/70590729/86afdbaa-cf5c-4e53-897c-e32931bc1048)
+
+
 ### Example of Usage:
 1. Create a singleton instance of the plugin and add it to the AutoLoad section in Project Settings.
 2. Call the function pay(name_product) with the desired purchase name to initiate the purchase process.
@@ -39,63 +50,52 @@ In short follow these steps:
 ```
 extends Node
 
-const TEST_ITEM_SKU:Array = ["purchase1","purchase2","purchase3"] # существующие товары в игре
+const NON_CONSUMABLE_ITEMS:Array = ["purchase1", "purchase2", "purchase3"] # Non-consumable items
+const CONSUMABLE_ITEMS:Array = ["pay1", "pay2"] # Consumable items
 
 var payment = null
 var test_item_purchase_token = null
 var purchasable_inapp:Dictionary = {}
+var purchased_inapp:String = ""
+var to_buy_item:String = ""
 
 func _ready() -> void:
 	if Engine.has_singleton("GodotGooglePlayBilling"):
 		payment = Engine.get_singleton("GodotGooglePlayBilling")
-		# No params.
-		payment.connect("connected", self, "_on_connected")
-		# No params.
-		payment.connect("disconnected", self, "_on_disconnected")
-		# Response ID (int), Debug message (string).
-		payment.connect("connect_error", self, "_on_connect_error")
-		# Purchases (Dictionary[]).
-		payment.connect("purchases_updated", self, "_on_purchases_updated")
-		# Response ID (int), Debug message (string).
-		payment.connect("purchase_error", self, "_on_purchase_error")
-		# SKUs (Dictionary[]).
-		payment.connect("product_details_query_completed", self, "_on_product_details_query_completed")
-		# Response ID (int), Debug message (string), Queried SKUs (string[]).
-		payment.connect("product_details_query_error", self, "_on_product_details_query_error")
-		# Purchase token (string).
-		payment.connect("purchase_acknowledged", self, "_on_purchase_acknowledged")
-		# Response ID (int), Debug message (string), Purchase token (string).
-		payment.connect("purchase_acknowledgement_error", self, "_on_purchase_acknowledgement_error")
-		# Purchase token (string).
-		payment.connect("purchase_consumed", self, "_on_purchase_consumed")
-		# Response ID (int), Debug message (string), Purchase token (string).
-		payment.connect("purchase_consumption_error", self, "_on_purchase_consumption_error")
-		# Response for query purchases.
-		payment.connect("query_purchases_response", self, "_on_query_purchases_response")
+		_connect_signals() # Connect signals to the payment object
+		payment.startConnection() # Start connection to the billing service
 
-		payment.startConnection()
+func _connect_signals():
+	# Connect various signals for handling billing events
+	payment.connect("connected", self, "_on_connected")
+	payment.connect("disconnected", self, "_on_disconnected")
+	payment.connect("connect_error", self, "_on_connect_error")
+	payment.connect("purchases_updated", self, "_on_purchases_updated")
+	payment.connect("purchase_error", self, "_on_purchase_error")
+	payment.connect("product_details_query_completed", self, "_on_product_details_query_completed")
+	payment.connect("product_details_query_error", self, "_on_product_details_query_error")
+	payment.connect("purchase_acknowledged", self, "_on_purchase_acknowledged")
+	payment.connect("purchase_acknowledgement_error", self, "_on_purchase_acknowledgement_error")
+	payment.connect("purchase_consumed", self, "_on_purchase_consumed")
+	payment.connect("purchase_consumption_error", self, "_on_purchase_consumption_error")
+	payment.connect("query_purchases_response", self, "_on_query_purchases_response")
 
 func _on_connected():
 	print("CONNECTED!")
-	yield(get_tree().create_timer(2), "timeout")
-
-	# Создаёт запрос на получение информации о товарах
-	payment.queryProductDetails(TEST_ITEM_SKU, "inapp")
-
-	# Запрос информации о купленных товарах.
+	yield(get_tree().create_timer(2), "timeout") # Wait for 2 seconds
+	# Request product details for all items
+	var all_items = NON_CONSUMABLE_ITEMS + CONSUMABLE_ITEMS
+	payment.queryProductDetails(all_items, "inapp")
+	# Query information about purchased items
 	payment.queryPurchases("inapp")
 
 func _on_product_details_query_completed(sku_details):
 	print("Product details query completed: " + str(sku_details))
+	# Store details of each purchasable item
 	for available_sku in sku_details:
 		purchasable_inapp[available_sku.productId] = available_sku
-		match available_sku["productId"]:
-			"purchase1":
-				var ads_remove_price = available_sku["price"]
-			"purchase2":
-				var ads_remove_price = available_sku["price"]
-			"purchase3":
-				var ads_remove_price = available_sku["price"]
+		var item_price = available_sku["price"]
+		print("Price for %s is %s" % [available_sku["productId"], item_price])
 
 func _on_product_details_query_error(code, message):
 	print("SKU details query error %d: %s" % [code, message])
@@ -107,41 +107,52 @@ func _on_query_purchases_response(query_result):
 			print("query_result.purchases is empty!")
 		else:
 			print("query_result.purchases = ", query_result.purchases)
+			# Check if there are any non-consumable or consumable purchases
 			for purchase in query_result.purchases:
-				if (purchase.productId == "purchase1" or purchase.productId == "purchase2" or purchase.productId == "purchase3") and purchase.purchaseState == 1:
-					print("Purchases Found!")
+				if purchase.productId in NON_CONSUMABLE_ITEMS and purchase.purchaseState == 1:
+					print("Non-consumable purchase found!")
+				elif purchase.productId in CONSUMABLE_ITEMS and purchase.purchaseState == 1:
+					print("Consumable purchase found!")
 	else:
 		print("Failed to query in-app purchases.")
 
 func _on_purchases_updated(purchases):
-	purchased_inapp = to_buy_item
+	# Handle updated purchases
 	for purchase in purchases:
 		if not purchase.is_acknowledged:
-			# payment.consumePurchase(purchase.purchaseToken) # многоразовая покупка
-			payment.acknowledgePurchase(purchase.purchaseToken) # одноразовая покупка
+			if purchase.productId in NON_CONSUMABLE_ITEMS:
+				payment.acknowledgePurchase(purchase.purchaseToken) # Non-consumable purchase
+			elif purchase.productId in CONSUMABLE_ITEMS:
+				payment.consumePurchase(purchase.purchaseToken) # Consumable purchase
 	if purchases.size() > 0:
+		# Store the last purchase token
 		test_item_purchase_token = purchases[purchases.size() - 1].purchaseToken
 
-var purchased_inapp:String
-# одноразовые покупки
 func _on_purchase_acknowledged(_purchase_token):
-	match purchased_inapp:
-		"purchase1":
-			print("Purchased purchase1")
-		"purchase2":
-			print("Purchased purchase2")
-		"purchase3":
-			print("Purchased purchase3")
+	print("Purchase acknowledged: %s" % purchased_inapp)
+	# Handle the acknowledged purchase
+	_handle_purchase(purchased_inapp)
 
-# многоразовые покупки
 func _on_purchase_consumed(_purchase_token):
-	match purchased_inapp:
+	print("Purchase consumed: %s" % purchased_inapp)
+	# Handle the consumed purchase
+	_handle_purchase(purchased_inapp)
+
+func _handle_purchase(product_id):
+	# Handle specific purchases based on the product ID
+	match product_id:
+		"purchase1":
+			print("Handling purchase1")
+		"purchase2":
+			print("Handling purchase2")
+		"purchase3":
+			print("Handling purchase3")
 		"pay1":
-			$"/root/User".monet += 200
+			$"/root/User".monet += 250
 			$"/root/User".save()
 			$"/root/Global".pay_true = true
 		"pay2":
-			$"/root/User".monet += 1205
+			$"/root/User".monet += 1500
 			$"/root/User".save()
 			$"/root/Global".pay_true = true
 
@@ -156,12 +167,14 @@ func _on_purchase_consumption_error(code, message, purchase_token):
 
 func _on_disconnected():
 	print("GodotGooglePlayBilling disconnected. Will try to reconnect in 10s...")
-	yield(get_tree().create_timer(10), "timeout")
-	payment.startConnection()
-
-var to_buy_item:String
+	yield(get_tree().create_timer(10), "timeout") # Wait for 10 seconds
+	payment.startConnection() # Attempt to reconnect to the billing service
 
 func pay(name_product):
-	payment.purchase(name_product, "inapp", "", "") # Добавлены параметры
-	to_buy_item = name_product
+	# Initiate purchase for the specified product
+	if name_product in NON_CONSUMABLE_ITEMS or name_product in CONSUMABLE_ITEMS:
+		payment.purchase(name_product, "inapp", "", "") # Added parameters
+		to_buy_item = name_product
+	else:
+		print("Invalid product: %s" % name_product)
 ```
