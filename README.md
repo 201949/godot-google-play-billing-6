@@ -1,5 +1,6 @@
 # godot-google-play-billing-6
 Godot Android plugin for the Google Play Billing Library version 6 (tested on Godot 3.5.2)
+
 Plugin supports:
 - One-time purchases (in-app)
 - Repeat purchases (in-app)
