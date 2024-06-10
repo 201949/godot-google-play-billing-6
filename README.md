@@ -96,9 +96,9 @@ func _on_connected():
 
 	# Request product details for all items
 	var all_items = NON_CONSUMABLE_ITEMS + CONSUMABLE_ITEMS + SUBSCRIPTION_ITEMS
+	var all_items = NON_CONSUMABLE_ITEMS + CONSUMABLE_ITEMS
 	payment.queryProductDetails(all_items, "inapp")
-	payment.queryProductDetails(all_items, "subs")
-
+	payment.queryProductDetails(SUBSCRIPTION_ITEMS, "subs")
 	# Query information about purchased items
 	payment.queryPurchases("inapp")
 	payment.queryPurchases("subs")
