@@ -69,7 +69,10 @@ var to_buy_item:String = ""
 func _ready() -> void:
 	if Engine.has_singleton("GodotGooglePlayBilling"):
 		payment = Engine.get_singleton("GodotGooglePlayBilling")
+		payment.setLogLevel(0)		# Set loglevel 0 - none, 1 - enabled
+		payment.setLogTag("godot")	# Set TAG for log
 		_connect_signals() # Connect signals to the payment object
+		print("Starting connection to Google Play Billing...")
 		payment.startConnection() # Start connection to the billing service
 
 func _connect_signals():
@@ -90,11 +93,15 @@ func _connect_signals():
 func _on_connected():
 	print("CONNECTED!")
 	yield(get_tree().create_timer(2), "timeout") # Wait for 2 seconds
+
 	# Request product details for all items
 	var all_items = NON_CONSUMABLE_ITEMS + CONSUMABLE_ITEMS + SUBSCRIPTION_ITEMS
 	payment.queryProductDetails(all_items, "inapp")
+	payment.queryProductDetails(all_items, "subs")
+
 	# Query information about purchased items
 	payment.queryPurchases("inapp")
+	payment.queryPurchases("subs")
 
 func _on_product_details_query_completed(sku_details):
 	print("Product details query completed: " + str(sku_details))
