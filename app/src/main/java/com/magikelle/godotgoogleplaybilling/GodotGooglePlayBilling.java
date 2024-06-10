@@ -182,10 +182,10 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
                     for (ProductDetails productDetails : list) {
                         productDetailsCache.put(productDetails.getProductId(), productDetails);
                     }
-                    log("Product Details Query Completed!");
+                    log("Product Details Query Completed for " + type + " products.");
                     emitSignal("product_details_query_completed", (Object) GooglePlayBillingUtils.convertProductDetailsListToDictionaryObjectArray(list));
                 } else {
-                    log("Product Details Query Error!");
+                    log("Product Details Query Error for " + type + " products.");
                     emitSignal("product_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), list);
                 }
             }
@@ -239,37 +239,59 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
         this.obfuscatedAccountId = accountId;
         this.obfuscatedProfileId = profileId;
 
+        log("Initiating purchase for product: " + productId); // Добавим логирование начала покупки
+        log("Initiating purchase with type: " + type); // Добавим логирование типа покупки
+
         if (!productDetailsCache.containsKey(productId)) {
-            log("Purchase Error!");
+            log("Product details not available in cache for product: " + productId); // Сообщение о недоступности деталей продукта в кэше
             emitSignal("purchase_error", BillingClient.BillingResponseCode.SERVICE_DISCONNECTED, "Product details not available");
             return;
         }
 
+        log("Product details found in cache: " + productDetailsCache.get(productId)); // Вывод информации о продукте из кэша
+
+        log("Continuing purchase"); // Сообщение о том, что выполнение кода продолжается
+
         ProductDetails productDetails = productDetailsCache.get(productId);
+
+        String offerToken = productDetails.getSubscriptionOfferDetails().get(0).getOfferToken();
+
         BillingFlowParams.ProductDetailsParams productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder()
                 .setProductDetails(productDetails)
+                .setOfferToken(offerToken) // Установка offerToken
                 .build();
+
+        log("Continuing with productDetailsParams"); // Сообщение о том, что выполнение кода продолжается
 
         BillingFlowParams.Builder builder = BillingFlowParams.newBuilder();
         builder.setProductDetailsParamsList(Arrays.asList(productDetailsParams));
         builder.setObfuscatedAccountId(this.obfuscatedAccountId);
         builder.setObfuscatedProfileId(this.obfuscatedProfileId);
 
+        log("Continuing with Builder"); // Сообщение о том, что выполнение кода продолжается
+
         BillingResult billingResult = billingClient.launchBillingFlow(getActivity(), builder.build());
+
+        log("Continuing with billingResult"); // Сообщение о том, что выполнение кода продолжается
 
         if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
             log("Purchase Error!");
             emitSignal("purchase_error", billingResult.getResponseCode(), billingResult.getDebugMessage());
         }
+
+        log("Ending method"); // Сообщение о том, что выполнение кода завершилось
     }
 
     @Override
     public void onPurchasesUpdated(@NonNull BillingResult billingResult, List<Purchase> purchases) {
         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
             log("Purchase Updated!");
+            for (Purchase purchase : purchases) {
+                log("Purchase details: " + purchase.getOriginalJson());
+            }
             emitSignal("purchases_updated", (Object) GooglePlayBillingUtils.convertPurchaseListToDictionaryObjectArray(purchases));
         } else {
-            log("Purchase Error!");
+            log("Purchase Error: " + billingResult.getDebugMessage());
             emitSignal("purchase_error", billingResult.getResponseCode(), billingResult.getDebugMessage());
         }
     }
