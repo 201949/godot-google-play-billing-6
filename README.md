@@ -95,7 +95,6 @@ func _on_connected():
 	yield(get_tree().create_timer(2), "timeout") # Wait for 2 seconds
 
 	# Request product details for all items
-	var all_items = NON_CONSUMABLE_ITEMS + CONSUMABLE_ITEMS + SUBSCRIPTION_ITEMS
 	var all_items = NON_CONSUMABLE_ITEMS + CONSUMABLE_ITEMS
 	payment.queryProductDetails(all_items, "inapp")
 	payment.queryProductDetails(SUBSCRIPTION_ITEMS, "subs")
