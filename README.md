@@ -52,6 +52,7 @@ extends Node
 
 const NON_CONSUMABLE_ITEMS:Array = ["purchase1", "purchase2", "purchase3"] # Non-consumable items
 const CONSUMABLE_ITEMS:Array = ["pay1", "pay2"] # Consumable items
+const SUBSCRIPTION_ITEMS:Array = ["subscription1", "subscription2"] # Subscription items
 
 var payment = null
 var test_item_purchase_token = null
@@ -84,7 +85,7 @@ func _on_connected():
 	print("CONNECTED!")
 	yield(get_tree().create_timer(2), "timeout") # Wait for 2 seconds
 	# Request product details for all items
-	var all_items = NON_CONSUMABLE_ITEMS + CONSUMABLE_ITEMS
+	var all_items = NON_CONSUMABLE_ITEMS + CONSUMABLE_ITEMS + SUBSCRIPTION_ITEMS
 	payment.queryProductDetails(all_items, "inapp")
 	# Query information about purchased items
 	payment.queryPurchases("inapp")
@@ -107,12 +108,14 @@ func _on_query_purchases_response(query_result):
 			print("query_result.purchases is empty!")
 		else:
 			print("query_result.purchases = ", query_result.purchases)
-			# Check if there are any non-consumable or consumable purchases
+			# Check if there are any non-consumable, consumable purchases, or subscriptions
 			for purchase in query_result.purchases:
 				if purchase.productId in NON_CONSUMABLE_ITEMS and purchase.purchaseState == 1:
 					print("Non-consumable purchase found!")
 				elif purchase.productId in CONSUMABLE_ITEMS and purchase.purchaseState == 1:
 					print("Consumable purchase found!")
+				elif purchase.productId in SUBSCRIPTION_ITEMS and purchase.purchaseState == 1:
+					print("Subscription purchase found!")
 	else:
 		print("Failed to query in-app purchases.")
 
@@ -155,6 +158,10 @@ func _handle_purchase(product_id):
 			$"/root/User".monet += 1500
 			$"/root/User".save()
 			$"/root/Global".pay_true = true
+		"subscription1":
+			print("Handling subscription1")
+		"subscription2":
+			print("Handling subscription2")
 
 func _on_purchase_error(code, message):
 	print("Purchase error %d: %s" % [code, message])
@@ -172,9 +179,13 @@ func _on_disconnected():
 
 func pay(name_product):
 	# Initiate purchase for the specified product
-	if name_product in NON_CONSUMABLE_ITEMS or name_product in CONSUMABLE_ITEMS:
-		payment.purchase(name_product, "inapp", "", "") # Added parameters
-		to_buy_item = name_product
+	if name_product in NON_CONSUMABLE_ITEMS or name_product in CONSUMABLE_ITEMS or name_product in SUBSCRIPTION_ITEMS:
+		var type = "inapp"
+		if name_product in SUBSCRIPTION_ITEMS:
+			type = "subs"
+		print("Initiating purchase for product: %s" % name_product)
+		print("Initiating purchase with type: %s" % type)
+		payment.purchase(name_product, type, "", "")
 	else:
 		print("Invalid product: %s" % name_product)
 ```
