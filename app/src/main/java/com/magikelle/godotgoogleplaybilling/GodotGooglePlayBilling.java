@@ -254,12 +254,16 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
 
         ProductDetails productDetails = productDetailsCache.get(productId);
 
-        String offerToken = productDetails.getSubscriptionOfferDetails().get(0).getOfferToken();
+        BillingFlowParams.ProductDetailsParams.Builder productDetailsParamsBuilder = BillingFlowParams.ProductDetailsParams.newBuilder()
+                .setProductDetails(productDetails);
 
-        BillingFlowParams.ProductDetailsParams productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder()
-                .setProductDetails(productDetails)
-                .setOfferToken(offerToken) // Установка offerToken
-                .build();
+        // Установка offerToken только для подписок
+        if (type.equals("subs")) {
+            String offerToken = productDetails.getSubscriptionOfferDetails().get(0).getOfferToken();
+            productDetailsParamsBuilder.setOfferToken(offerToken);
+        }
+
+        BillingFlowParams.ProductDetailsParams productDetailsParams = productDetailsParamsBuilder.build();
 
         log("Continuing with productDetailsParams"); // Сообщение о том, что выполнение кода продолжается
 
