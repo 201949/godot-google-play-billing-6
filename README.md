@@ -12,6 +12,12 @@ Plugin supports:
 [![GPBL](https://img.shields.io/badge/Google%20Play%20Billing%20Library-6.2.1-green.svg)](https://developer.android.com/google/play/billing/integrate)
 [![MIT license](https://img.shields.io/badge/License-MIT-yellowgreen.svg)](https://lbesson.mit-license.org/)
 
+If you want me to continue developing the plugin and keeping it up-to-date, please support me by
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/magikelle)
+
+Please give a star :star: to the plugin repository if you found it useful.
+
 ### Google Play Billing Library version deprecation information
 https://developer.android.com/google/play/billing/deprecation-faq
 
