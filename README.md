@@ -10,7 +10,7 @@ Plugin supports:
 [![Android](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://developer.android.com)
 [![Godot](https://img.shields.io/badge/Godot%20Engine-3.5.2-blue.svg)](https://github.com/godotengine/godot/)
 [![GPBL](https://img.shields.io/badge/Google%20Play%20Billing%20Library-6.2.1-green.svg)](https://developer.android.com/google/play/billing/integrate)
-[![MIT license](https://img.shields.io/badge/License-MIT-yellowgreen.svg)](https://lbesson.mit-license.org/)
+[![MIT license](https://img.shields.io/badge/License-MIT-yellowgreen.svg)](https://github.com/201949/godot-google-play-billing-6/blob/main/LICENSE)
 
 If you want me to continue developing the plugin and keeping it up-to-date, please support me by
 
