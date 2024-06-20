@@ -30,7 +30,6 @@ public class GooglePlayBillingUtils {
 		dictionary.put("isAutoRenewing", purchase.isAutoRenewing());
 		dictionary.put("originalJson", purchase.getOriginalJson());
 		dictionary.put("isAcknowledged", purchase.isAcknowledged());
-		dictionary.put("isAutoRenewing", purchase.isAutoRenewing());
 		return dictionary;
 	}
 
