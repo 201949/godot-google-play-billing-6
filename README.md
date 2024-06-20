@@ -140,7 +140,7 @@ func _on_query_purchases_response(query_result):
 func _on_purchases_updated(purchases):
 	# Handle updated purchases
 	for purchase in purchases:
-		if not purchase.is_acknowledged:
+		if not purchase.isAcknowledged:
 			if purchase.productId in NON_CONSUMABLE_ITEMS:
 				payment.acknowledgePurchase(purchase.purchaseToken) # Non-consumable purchase
 			elif purchase.productId in CONSUMABLE_ITEMS:
