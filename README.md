@@ -48,11 +48,11 @@ In short follow these steps:
 
 1. First check your Android export template settings. You need to specify a minimum SDK version of 21 and a target SDK version of 34 to meet the Google Play target platform requirements.
 
-![336757830-aa3a2889-3bee-43f9-be1c-372c3dc675ca](https://github.com/201949/godot-google-play-billing-6/assets/70590729/048e6a7c-7ea6-4903-9877-d83796efe122)
+![Pic 01](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_01.png)
 
 2. Secondly, check the \android\build\config.gradle file and make the necessary changes to the SDK version specification if needed.
 
-![336747031-30146e41-1d66-4574-8354-4777494662b3](https://github.com/201949/godot-google-play-billing-6/assets/70590729/86afdbaa-cf5c-4e53-897c-e32931bc1048)
+![Pic 02](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_02.png)
 
 
 ### Example of Usage:
