@@ -46,7 +46,7 @@ In short follow these steps:
 
 ### Preparing the Editor and Project for Plugin Use
 
-1. First, check the export template settings for Android. You need to specify a minimum SDK version of 21 there.
+1. First check your Android export template settings. You need to specify a minimum SDK version of 21 and a target SDK version of 34 to meet the Google Play target platform requirements.
 
 ![336757830-aa3a2889-3bee-43f9-be1c-372c3dc675ca](https://github.com/201949/godot-google-play-billing-6/assets/70590729/048e6a7c-7ea6-4903-9877-d83796efe122)
 
@@ -115,6 +115,16 @@ func _on_product_details_query_completed(sku_details):
 		purchasable_inapp[available_sku.productId] = available_sku
 		var item_price = available_sku["price"]
 		print("Price for %s is %s" % [available_sku["productId"], item_price])
+
+		match available_sku["productId"]:
+			"purchase1":
+				print("Currency Code: ", available_sku["currencyCode"])
+				print("Description: ", available_sku["description"])
+				print("Formatted Price: ", available_sku["formattedPrice"])
+				print("Price: ",available_sku["price"])
+				print("Product ID: ",available_sku["productId"])
+				print("Title: ", available_sku["title"])
+				print("Type: ", available_sku["type"])
 
 func _on_product_details_query_error(code, message):
 	print("SKU details query error %d: %s" % [code, message])

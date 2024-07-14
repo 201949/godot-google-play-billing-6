@@ -1,8 +1,11 @@
 package com.magikelle.godotgoogleplaybilling.utils;
 
+import android.util.Log;
+
 import org.godotengine.godot.Dictionary;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.ProductDetails;
+import com.magikelle.godotgoogleplaybilling.GodotGooglePlayBilling;
 
 import java.util.List;
 
@@ -54,11 +57,17 @@ public class GooglePlayBillingUtils {
 		if (details.getOneTimePurchaseOfferDetails() != null) {
 			dictionary.put("price", details.getOneTimePurchaseOfferDetails().getPriceAmountMicros() / 1000000.0);
 			dictionary.put("currencyCode", details.getOneTimePurchaseOfferDetails().getPriceCurrencyCode());
+			dictionary.put("formattedPrice", details.getOneTimePurchaseOfferDetails().getFormattedPrice());	// Added getFormattedPrice suggested by gkwaerp
 		} else if (details.getSubscriptionOfferDetails() != null && !details.getSubscriptionOfferDetails().isEmpty()) {
 			// Использование первой подписки в качестве примера
 			ProductDetails.SubscriptionOfferDetails subscriptionOfferDetails = details.getSubscriptionOfferDetails().get(0);
 			dictionary.put("price", subscriptionOfferDetails.getPricingPhases().getPricingPhaseList().get(0).getPriceAmountMicros() / 1000000.0);
 			dictionary.put("currencyCode", subscriptionOfferDetails.getPricingPhases().getPricingPhaseList().get(0).getPriceCurrencyCode());
+			dictionary.put("formattedPrice", subscriptionOfferDetails.getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice());	// Added getFormattedPrice suggested by gkwaerp
+		}
+
+		if (GodotGooglePlayBilling.logLevel > 0) {
+			Log.i(GodotGooglePlayBilling.logTag, dictionary.toString());	// Логирование полученной словарем информации
 		}
 
 		return dictionary;

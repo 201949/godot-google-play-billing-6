@@ -39,8 +39,8 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
     private String obfuscatedAccountId;
     private String obfuscatedProfileId;
     private static final String BILLING_LIBRARY_VERSION = "6.2.1"; // Actual version
-    private int logLevel = 0; // Added: default log level (is off)
-    private String logTag = "godot"; // Log TAG
+    public static int logLevel = 0; // Added: default log level (is off), changed to public static for use in GooglePlayBillingUtils
+    public static String logTag = "godot"; // Log TAG, changed to public static for use in GooglePlayBillingUtils
 
     public GodotGooglePlayBilling(Godot godot) {
         super(godot);

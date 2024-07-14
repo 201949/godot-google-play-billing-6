@@ -3,7 +3,7 @@ plugins {
 }
 
 ext.libraryName = "GodotGooglePlayBilling"
-ext.libraryVersionCode = 1
+ext.libraryVersionCode = 2
 ext.libraryVersionName = "6.2.1"
 
 android {
