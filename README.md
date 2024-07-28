@@ -54,6 +54,8 @@ In short follow these steps:
 
 ![336747031-30146e41-1d66-4574-8354-4777494662b3](https://github.com/201949/godot-google-play-billing-6/assets/70590729/86afdbaa-cf5c-4e53-897c-e32931bc1048)
 
+3. Thirdly, in Android export template "Options" section at "Permissions" set "Access Network State" to "On" and set "Internet" to "On".
+ Also set some addition permissions at "Custom Permissions": "com.android.vending.BILLING" (might be required for some reason). 
 
 ### Example of Usage:
 1. Create a singleton instance of the plugin and add it to the AutoLoad section in Project Settings.
