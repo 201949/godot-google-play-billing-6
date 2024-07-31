@@ -186,7 +186,11 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
                     emitSignal("product_details_query_completed", (Object) GooglePlayBillingUtils.convertProductDetailsListToDictionaryObjectArray(list));
                 } else {
                     log("Product Details Query Error for " + type + " products.");
-                    emitSignal("product_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), list);
+
+                    String[] strlist = new String[list.size()];
+                    list.toArray(strlist);
+
+                    emitSignal("product_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), strlist);
                 }
             }
         });

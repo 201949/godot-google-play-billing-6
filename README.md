@@ -128,8 +128,8 @@ func _on_product_details_query_completed(sku_details):
 				print("Title: ", available_sku["title"])
 				print("Type: ", available_sku["type"])
 
-func _on_product_details_query_error(code, message):
-	print("SKU details query error %d: %s" % [code, message])
+func _on_product_details_query_error(code, message, list):
+	print("SKU details query error %d: %s" % [code, message, list])
 
 func _on_query_purchases_response(query_result):
 	print("query_purchases_response Check!")
