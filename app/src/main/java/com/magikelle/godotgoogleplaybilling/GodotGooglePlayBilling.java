@@ -25,6 +25,7 @@ import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
 import com.android.billingclient.api.QueryPurchasesParams;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -73,9 +74,9 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
         signals.add(new SignalInfo("query_purchases_response", Object.class));
         signals.add(new SignalInfo("purchase_error", Integer.class, String.class));
         signals.add(new SignalInfo("product_details_query_completed", Object[].class));
-        signals.add(new SignalInfo("product_details_query_error", Integer.class, String.class, String.class));
+        signals.add(new SignalInfo("product_details_query_error", Integer.class, String.class, String[].class));
         signals.add(new SignalInfo("purchase_acknowledged", String.class));
-        signals.add(new SignalInfo("purchase_acknowledgement_error", Integer.class, String.class, String.class));
+        signals.add(new SignalInfo("purchase_acknowledgement_error", Integer.class, String.class, String[].class));
         signals.add(new SignalInfo("purchase_consumed", String.class));
         signals.add(new SignalInfo("purchase_consumption_error", Integer.class, String.class, String.class));
 
@@ -177,29 +178,20 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
 
         billingClient.queryProductDetailsAsync(params, new ProductDetailsResponseListener() {
             @Override
-            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
+            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsList) {
+                log("Billing Result: " + billingResult);
+                if (productDetailsList.isEmpty()) {
+                    log("Product Details list is empty!");
+                    }
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    for (ProductDetails productDetails : list) {
+                    for (ProductDetails productDetails : productDetailsList) {
                         productDetailsCache.put(productDetails.getProductId(), productDetails);
                     }
                     log("Product Details Query Completed for " + type + " products.");
-                    emitSignal("product_details_query_completed", (Object) GooglePlayBillingUtils.convertProductDetailsListToDictionaryObjectArray(list));
+                    emitSignal("product_details_query_completed", (Object) GooglePlayBillingUtils.convertProductDetailsListToDictionaryObjectArray(productDetailsList));
                 } else {
                     log("Product Details Query Error for " + type + " products.");
-
-                    // Преобразование списка в строку
-                    String strList;
-                    if (list.isEmpty()) {
-                        log("Product Details list is empty.");
-                        strList = "Empty List";
-                    } else {
-                        String[] strlist = new String[list.size()];
-                        list.toArray(strlist);
-                        strList = Arrays.toString(strlist);
-                    }
-                    log("StrList: " + strList);
-
-                    emitSignal("product_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), strList);
+                    emitSignal("product_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), list);
                 }
 
             }
