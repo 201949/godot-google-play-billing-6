@@ -187,11 +187,21 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
                 } else {
                     log("Product Details Query Error for " + type + " products.");
 
-                    String[] strlist = new String[list.size()];
-                    list.toArray(strlist);
+                    // Преобразование списка в строку
+                    String strList;
+                    if (list.isEmpty()) {
+                        log("Product Details list is empty.");
+                        strList = "[]";
+                    } else {
+                        String[] strlist = new String[list.size()];
+                        list.toArray(strlist);
+                        strList = Arrays.toString(strlist);
+                        log("StrList: " + strList);
+                    }
 
-                    emitSignal("product_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), strlist);
+                    emitSignal("product_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), strList);
                 }
+
             }
         });
     }
