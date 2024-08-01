@@ -73,7 +73,7 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
         signals.add(new SignalInfo("query_purchases_response", Object.class));
         signals.add(new SignalInfo("purchase_error", Integer.class, String.class));
         signals.add(new SignalInfo("product_details_query_completed", Object[].class));
-        signals.add(new SignalInfo("product_details_query_error", Integer.class, String.class, String[].class));
+        signals.add(new SignalInfo("product_details_query_error", Integer.class, String.class, String.class));
         signals.add(new SignalInfo("purchase_acknowledged", String.class));
         signals.add(new SignalInfo("purchase_acknowledgement_error", Integer.class, String.class, String.class));
         signals.add(new SignalInfo("purchase_consumed", String.class));
@@ -191,13 +191,13 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
                     String strList;
                     if (list.isEmpty()) {
                         log("Product Details list is empty.");
-                        strList = "[]";
+                        strList = "Empty List";
                     } else {
                         String[] strlist = new String[list.size()];
                         list.toArray(strlist);
                         strList = Arrays.toString(strlist);
-                        log("StrList: " + strList);
                     }
+                    log("StrList: " + strList);
 
                     emitSignal("product_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), strList);
                 }
