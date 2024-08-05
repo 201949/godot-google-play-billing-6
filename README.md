@@ -236,3 +236,17 @@ func pay(name_product):
     else:
         print("Invalid product: %s" % name_product)
 ```
+
+## Upcoming Improvements
+
+I am actively working on making the plugin even more user-friendly. Here’s what I have planned:
+
+### Simplified Integration
+
+I plan to redesign the plugin so that users will only need to add a single class as a node in their project. This class will handle all billing operations and allow for configuration of items (one-time purchases, repeat purchases, and subscriptions) directly through exported variables.
+
+### Enhanced Configuration
+
+The new design will make it easier to specify purchase items and manage billing operations with minimal setup.
+
+Stay tuned for updates, and feel free to [open an issue](https://github.com/201949/godot-google-play-billing-6/issues) or [contribute](https://github.com/201949/godot-google-play-billing-6/pulls) if you have any suggestions or feedback!
