@@ -1,21 +1,25 @@
-# godot-google-play-billing-6
-Godot Android plugin for the Google Play Billing Library version 6 (working on Godot 3.5.2)
+# Godot Google Play Billing 6
 
-Plugin supports:
-- One-time purchases (in-app)
-- Repeat purchases (in-app)
-- Subscriptions
+A Godot plugin for integrating Google Play Billing Library version 6 with Godot 3.5.2
 
 [![Android](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://developer.android.com)
 [![Godot](https://img.shields.io/badge/Godot%20Engine-3.5.2-blue.svg)](https://github.com/godotengine/godot/)
 [![GPBL](https://img.shields.io/badge/Google%20Play%20Billing%20Library-6.2.1-green.svg)](https://developer.android.com/google/play/billing/integrate)
 [![MIT license](https://img.shields.io/badge/License-MIT-yellowgreen.svg)](https://github.com/201949/godot-google-play-billing-6/blob/main/LICENSE)
 
-If you want me to continue developing the plugin and keeping it up-to-date, please support me by
+## Supported Features
+
+- **One-time in-app purchases**
+- **Repeat in-app purchases**
+- **Subscriptions**
+
+## Disclaimer
+
+If you want me to continue developing the plugin and keeping it up-to-date, please support me by:
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/magikelle)
 
-Please give a star :star: to the plugin repository if you found it useful.
+Please also consider giving a star :star: to the plugin repository if you found it useful.
 
 ## Supporters
 
@@ -23,28 +27,34 @@ A big thank you to the following people for their support:
 - [davekaa](https://github.com/davekaa)
 - [mackatap](https://github.com/mackatap)
 
-## Google Play Billing Library version deprecation information
-https://developer.android.com/google/play/billing/deprecation-faq
+## Google Play Billing Library Version Deprecation Information
 
-## Generate plugin .aar file
-If there is no release for your Godot version, you need to generate a new plugin .aar file.  
-Follow these instructions: [official documentation](https://docs.godotengine.org/en/stable/tutorials/plugins/android/android_plugin.html "documentation").
+For information on version deprecation, visit: [Google Play Billing Library Deprecation FAQ](https://developer.android.com/google/play/billing/deprecation-faq)
 
-**Alternatively, you can download the precompiled for Godot 3.5.2 plugin files from the [releases page](https://github.com/201949/godot-google-play-billing-6/releases/tag/6.2.1_subs).**
+## Generating the Plugin .aar File
+
+If there is no release for your Godot version, you will need to generate a new plugin .aar file.  
+Follow these instructions: [Official Documentation](https://docs.godotengine.org/en/stable/tutorials/plugins/android/android_plugin.html "documentation").
+
+**Alternatively, you can download the precompiled plugin files for Godot 3.5.2 from the [releases page](https://github.com/201949/godot-google-play-billing-6/releases/tag/6.2.1_subs).**
 
 To compile the project yourself:
 
-1. Open a command window and *cd* into the *godot-google-play-billing-6* directory, then run the command below:
-    
+1. Open a command window and *cd* into the `godot-google-play-billing-6` directory, then run the appropriate command:
+
     * Windows:
     
-        `gradlew.bat build`
+        ```bash
+        gradlew.bat build
+        ```
         
     * Linux:
     
-        `./gradlew build`
+        ```bash
+        ./gradlew build
+        ```
     
-2. Copy the newly created .aar and .gdap files to your plugin directory:
+2. Copy the newly created `.aar` and `.gdap` files to your plugin directory:
 
     `app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar` to `[your godot project]/android/plugins/`
     
@@ -52,15 +62,15 @@ To compile the project yourself:
 
 ## Preparing the Editor and Project for Plugin Use
 
-1. First, check your Android export template settings. You need to specify a minimum SDK version of 21 and a target SDK version of 34 to meet the Google Play target platform requirements.
+1. Check your Android export template settings. You need to specify a minimum SDK version of 21 and a target SDK version of 34 to meet the Google Play target platform requirements.
 
-![Pic 01](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_01.png)
+    ![Pic 01](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_01.png)
 
-2. Secondly, check the `android/build/config.gradle` file and make the necessary changes to the SDK version specification if needed.
+2. Check the `android/build/config.gradle` file and make any necessary changes to the SDK version specification.
 
-![Pic 02](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_02.png)
+    ![Pic 02](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_02.png)
 
-3. Thirdly, in the Android export template "Options" section under "Permissions", set "Access Network State" to "On" and set "Internet" to "On". Also, add the following permission under "Custom Permissions": `com.android.vending.BILLING` (this might be required).
+3. In the Android export template "Options" section under "Permissions", set "Access Network State" and "Internet" to "On". Also, add the following permission under "Custom Permissions": `com.android.vending.BILLING` (this may be required).
 
 ## Example of Usage:
 
