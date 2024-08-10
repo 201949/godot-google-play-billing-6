@@ -182,6 +182,9 @@ func _on_purchase_acknowledged(_purchase_token):
     print("Purchase acknowledged: %s" % purchased_inapp)
     # Handle the acknowledged purchase
     _handle_purchase(purchased_inapp)
+    # Additional query information about purchased items after acknowledgement
+    payment.queryPurchases("inapp")
+    payment.queryPurchases("subs")
 
 func _on_purchase_consumed(_purchase_token):
     print("Purchase consumed: %s" % purchased_inapp)
