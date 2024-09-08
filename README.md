@@ -27,6 +27,15 @@ A big thank you to the following people for their support:
 - [davekaa](https://github.com/davekaa)
 - [mackatap](https://github.com/mackatap)
 
+## Production use
+*Google Play Store:*
+
+- ["Ugly Button Adventure"](https://play.google.com/store/apps/details?id=com.magikelle.uglybutton) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
+- ["Ugly Button 2"](https://play.google.com/store/apps/details?id=com.magikelle.uglybutton.chapter.two) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
+- ["Stunt Riders"](https://play.google.com/store/apps/details?id=com.magikelle.bikeriders) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
+- ["Lifty Circus Action Platformer"](https://play.google.com/store/apps/details?id=com.magikelle.liftycircus) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
+
+
 ## Google Play Billing Library Version Deprecation Information
 
 For information on version deprecation, visit: [Google Play Billing Library Deprecation FAQ](https://developer.android.com/google/play/billing/deprecation-faq)
