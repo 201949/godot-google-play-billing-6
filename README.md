@@ -1,6 +1,7 @@
 # Godot Google Play Billing 6
 
 A Godot plugin for integrating Google Play Billing Library version 6 with Godot 3.5.2
+(Can also be used for newer 3.X versions, but requires a little bit more work. See bellow for more info.)
 
 [![Android](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://developer.android.com)
 [![Godot](https://img.shields.io/badge/Godot%20Engine-3.5.2-blue.svg)](https://github.com/godotengine/godot/)
@@ -34,6 +35,7 @@ A big thank you to the following people for their support:
 - ["Ugly Button 2"](https://play.google.com/store/apps/details?id=com.magikelle.uglybutton.chapter.two) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
 - ["Stunt Riders"](https://play.google.com/store/apps/details?id=com.magikelle.bikeriders) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
 - ["Lifty Circus Action Platformer"](https://play.google.com/store/apps/details?id=com.magikelle.liftycircus) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
+- ["Galaxius: Space Battle"](https://play.google.com/store/apps/details?id=com.justjustin.galaxius&hl=en_US) by [Galaxius Games](https://play.google.com/store/apps/dev?id=4953770330659300081&hl=en_US)
 
 
 ## Google Play Billing Library Version Deprecation Information
@@ -43,11 +45,25 @@ For information on version deprecation, visit: [Google Play Billing Library Depr
 ## Generating the Plugin .aar File
 
 If there is no release for your Godot version, you will need to generate a new plugin .aar file.  
-Follow these instructions: [Official Documentation](https://docs.godotengine.org/en/stable/tutorials/plugins/android/android_plugin.html "documentation").
+
+1. Go to the downloads page of your desired Godot version
+2. Click "Show all downloads"
+3. Download the .AAR Library
+4. Clone this repository
+5. Place the newly downloaded .AAR file into the root of the cloned repository
+6. In the 'app' folder, change the following line on the 'build.gradle' file:
+   from this: compileOnly 'org.godotengine:godot:3.5.2.stable'
+   to this: compileOnly fileTree(dir: '..', include: ['godot-lib*.aar'])
+7. CD into the plugin's root directory, and run "gradlew build" in Command Prompt
+8. The newly generated .AAR plugin file will be located in 'app/build/outputs/aar'
+9. Take the 'release' .AAR file from the directory above, along with the 'GodotGooglePlayBilling.gdap' file from the root directory, and place them both in your Godot project under 'android/plugins'
+10. Don't forget to enable the plugin in Godot under your export settings!
+
+After that, you will have a plugin for the Godot version you need!
 
 **Alternatively, you can download the precompiled plugin files for Godot 3.5.2 from the [releases page](https://github.com/201949/godot-google-play-billing-6/releases/tag/6.2.1_subs).**
 
-To compile the project yourself:
+## To compile the project yourself:
 
 1. Open a command window and *cd* into the `godot-google-play-billing-6` directory, then run the appropriate command:
 
@@ -65,7 +81,7 @@ To compile the project yourself:
     
 2. Copy the newly created `.aar` and `.gdap` files to your plugin directory:
 
-    `app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar` to `[your godot project]/android/plugins/`
+    `app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar` and `[your godot project]/android/plugins/`
     
     `GodotGooglePlayBilling.gdap` to `[your godot project]/android/plugins/`
 
