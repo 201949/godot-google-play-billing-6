@@ -24,7 +24,7 @@ Please also consider giving a star :star: to the plugin repository if you found 
 
 ## Supporters
 
-A big thank you to the following people for their support:
+A big thank you to the following people for their sponsorship:
 - [davekaa](https://github.com/davekaa)
 - [mackatap](https://github.com/mackatap)
 
@@ -42,7 +42,7 @@ A big thank you to the following people for their support:
 
 For information on version deprecation, visit: [Google Play Billing Library Deprecation FAQ](https://developer.android.com/google/play/billing/deprecation-faq)
 
-## Generating the Plugin .aar File
+## Compiling the plugin .aar file for any versions of Godot libraries
 
 If there is no release for your Godot version, you will need to generate a new plugin .aar file.  
 
@@ -53,21 +53,10 @@ If there is no release for your Godot version, you will need to generate a new p
 5. Place the newly downloaded .AAR file into the root of the cloned repository
 6. In the 'app' folder, change the following line on the `build.gradle` file:
 
-   from this: `compileOnly org.godotengine:godot:3.5.2.stable`
+   from this: `compileOnly 'org.godotengine:godot:3.5.2.stable'`
 
    to this: `compileOnly fileTree(dir: '..', include: ['godot-lib*.aar'])`
-8. CD into the plugin's root directory, and run `gradlew build` in Command Prompt
-9. The newly generated .AAR plugin file will be located in `app/build/outputs/aar`
-10. Take the 'release' .AAR file from the directory above, along with the `GodotGooglePlayBilling.gdap` file from the root directory, and place them both in your Godot project under `android/plugins`
-11. Don't forget to enable the plugin in Godot under your export settings!
-
-After that, you will have a plugin for the Godot version you need!
-
-**Alternatively, you can download the precompiled plugin files for Godot 3.5.2 from the [releases page](https://github.com/201949/godot-google-play-billing-6/releases/tag/6.2.1_subs).**
-
-## To compile the project yourself:
-
-1. Open a command window and *cd* into the `godot-google-play-billing-6` directory, then run the appropriate command:
+8. Open a command window (or terminal) and *cd* into the `godot-google-play-billing-6` directory, then run the appropriate command:
 
     * Windows:
     
@@ -80,14 +69,20 @@ After that, you will have a plugin for the Godot version you need!
         ```bash
         ./gradlew build
         ```
-    
-2. Copy the newly created `.aar` and `.gdap` files to your plugin directory:
+9. The newly generated .AAR plugin file will be located in `app/build/outputs/aar`
+10. Take the 'release' .AAR file from the directory above, along with the `GodotGooglePlayBilling.gdap` file from the root directory, and place them both in your Godot project under `android/plugins`
+    Copy the newly created `.aar` and `.gdap` files to your plugin directory:
 
     from `app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar` to `[your godot project]/android/plugins/`
    
     and
    
     from `GodotGooglePlayBilling.gdap` to `[your godot project]/android/plugins/`
+11. Don't forget to enable the plugin in Godot under your export settings!
+
+After that, you will have a plugin for the Godot version you need.
+
+**Alternatively, you can download the precompiled plugin files for Godot 3.5.2 from the [releases page](https://github.com/201949/godot-google-play-billing-6/releases/tag/6.2.1_subs).**
 
 ## Preparing the Editor and Project for Plugin Use
 
