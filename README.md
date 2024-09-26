@@ -72,6 +72,7 @@ If there is no release for your Godot version, you will need to generate a new p
     *The newly generated .AAR plugin file will be located in `app/build/outputs/aar`*
 
 8. Take the 'release' .AAR file from the directory above, along with the `GodotGooglePlayBilling.gdap` file from the root directory, and place them both in your Godot project under `android/plugins`
+   
     Copy the newly created `.aar` and `.gdap` files to your plugin directory:
 
     from `app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar` to `[your godot project]/android/plugins/`
