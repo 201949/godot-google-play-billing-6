@@ -81,9 +81,11 @@ After that, you will have a plugin for the Godot version you need!
     
 2. Copy the newly created `.aar` and `.gdap` files to your plugin directory:
 
-    `app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar` and `[your godot project]/android/plugins/`
-    
-    `GodotGooglePlayBilling.gdap` to `[your godot project]/android/plugins/`
+    from `app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar` to `[your godot project]/android/plugins/`
+   
+    and
+   
+    from `GodotGooglePlayBilling.gdap` to `[your godot project]/android/plugins/`
 
 ## Preparing the Editor and Project for Plugin Use
 
