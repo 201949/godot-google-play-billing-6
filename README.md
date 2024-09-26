@@ -56,7 +56,7 @@ If there is no release for your Godot version, you will need to generate a new p
    from this: `compileOnly 'org.godotengine:godot:3.5.2.stable'`
 
    to this: `compileOnly fileTree(dir: '..', include: ['godot-lib*.aar'])`
-8. Open a command window (or terminal) and *cd* into the `godot-google-play-billing-6` directory, then run the appropriate command:
+7. Open a command window (or terminal) and *cd* into the `godot-google-play-billing-6` directory, then run the appropriate command:
 
     * Windows:
     
@@ -69,8 +69,9 @@ If there is no release for your Godot version, you will need to generate a new p
         ```bash
         ./gradlew build
         ```
-9. The newly generated .AAR plugin file will be located in `app/build/outputs/aar`
-10. Take the 'release' .AAR file from the directory above, along with the `GodotGooglePlayBilling.gdap` file from the root directory, and place them both in your Godot project under `android/plugins`
+    *The newly generated .AAR plugin file will be located in `app/build/outputs/aar`*
+
+8. Take the 'release' .AAR file from the directory above, along with the `GodotGooglePlayBilling.gdap` file from the root directory, and place them both in your Godot project under `android/plugins`
     Copy the newly created `.aar` and `.gdap` files to your plugin directory:
 
     from `app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar` to `[your godot project]/android/plugins/`
@@ -78,9 +79,10 @@ If there is no release for your Godot version, you will need to generate a new p
     and
    
     from `GodotGooglePlayBilling.gdap` to `[your godot project]/android/plugins/`
-11. Don't forget to enable the plugin in Godot under your export settings!
 
 After that, you will have a plugin for the Godot version you need.
+
+Don't forget to enable the plugin in Godot under your export settings!
 
 **Alternatively, you can download the precompiled plugin files for Godot 3.5.2 from the [releases page](https://github.com/201949/godot-google-play-billing-6/releases/tag/6.2.1_subs).**
 
