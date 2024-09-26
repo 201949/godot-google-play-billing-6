@@ -52,12 +52,14 @@ If there is no release for your Godot version, you will need to generate a new p
 4. Clone this repository
 5. Place the newly downloaded .AAR file into the root of the cloned repository
 6. In the 'app' folder, change the following line on the `build.gradle` file:
+
    from this: `compileOnly org.godotengine:godot:3.5.2.stable`
+
    to this: `compileOnly fileTree(dir: '..', include: ['godot-lib*.aar'])`
-7. CD into the plugin's root directory, and run `gradlew build` in Command Prompt
-8. The newly generated .AAR plugin file will be located in `app/build/outputs/aar`
-9. Take the 'release' .AAR file from the directory above, along with the `GodotGooglePlayBilling.gdap` file from the root directory, and place them both in your Godot project under `android/plugins`
-10. Don't forget to enable the plugin in Godot under your export settings!
+8. CD into the plugin's root directory, and run `gradlew build` in Command Prompt
+9. The newly generated .AAR plugin file will be located in `app/build/outputs/aar`
+10. Take the 'release' .AAR file from the directory above, along with the `GodotGooglePlayBilling.gdap` file from the root directory, and place them both in your Godot project under `android/plugins`
+11. Don't forget to enable the plugin in Godot under your export settings!
 
 After that, you will have a plugin for the Godot version you need!
 
