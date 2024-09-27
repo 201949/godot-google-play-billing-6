@@ -1,7 +1,7 @@
 # Godot Google Play Billing 6
 
 A Godot plugin for integrating Google Play Billing Library version 6 with Godot 3.5.2
-(Can also be used for newer 3.X versions, but requires a little bit more work. See bellow for more info.)
+(Can also be used for newer 3.X-4.X versions, but requires a little bit more work. See bellow for more info.)
 
 [![Android](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://developer.android.com)
 [![Godot](https://img.shields.io/badge/Godot%20Engine-3.5.2-blue.svg)](https://github.com/godotengine/godot/)
