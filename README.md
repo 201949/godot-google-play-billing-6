@@ -99,7 +99,7 @@ Don't forget to enable the plugin in Godot under your export settings!
 
 3. In the Android export template "Options" section under "Permissions", set "Access Network State" and "Internet" to "On". Also, add the following permission under "Custom Permissions": `com.android.vending.BILLING` (this may be required).
 
-## Example of Usage on Godot 3.5-3.6:
+## Example of Usage on Godot 3.5.X-3.6:
 
 1. Create a singleton instance of the plugin and add it to the AutoLoad section in Project Settings.
 2. Call the function `pay(name_product)` with the desired purchase name to initiate the purchase process.
