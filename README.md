@@ -27,6 +27,7 @@ Please also consider giving a star :star: to the plugin repository if you found 
 A big thank you to the following people for their sponsorship:
 - [davekaa](https://github.com/davekaa)
 - [mackatap](https://github.com/mackatap)
+- [galaxiusgames](https://github.com/galaxiusgames)
 
 ## Production use
 *Google Play Store:*
