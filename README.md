@@ -91,11 +91,11 @@ Don't forget to enable the plugin in Godot under your export settings!
 
 1. Check your Android export template settings. You need to specify a minimum SDK version of 21 and a target SDK version of 35 to meet the Google Play target platform requirements.
 
-    ![Pic 01](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_01.png)
+    ![Pic 01](https://raw.githubusercontent.com/201949/godot-google-play-billing-7/main/pic_01.png)
 
 2. Check the `android/build/config.gradle` file and make any necessary changes to the SDK version specification.
 
-    ![Pic 02](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_02.png)
+    ![Pic 02](https://raw.githubusercontent.com/201949/godot-google-play-billing-7/main/pic_02.png)
 
 3. In the Android export template "Options" section under "Permissions", set "Access Network State" and "Internet" to "On". Also, add the following permission under "Custom Permissions": `com.android.vending.BILLING` (this may be required).
 
