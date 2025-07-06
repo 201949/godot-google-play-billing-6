@@ -1,12 +1,12 @@
-# Godot Google Play Billing 6
+# Godot Google Play Billing 7
 
-A Godot plugin for integrating Google Play Billing Library version 6 with Godot 3.5.2
+A Godot plugin for integrating Google Play Billing Library version 7.1.0 with Godot 3.5.2
 (Can also be used for newer 3.X-4.X versions, but requires a little bit more work. See bellow for more info.)
 
 [![Android](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://developer.android.com)
 [![Godot](https://img.shields.io/badge/Godot%20Engine-3.5.2-blue.svg)](https://github.com/godotengine/godot/)
-[![GPBL](https://img.shields.io/badge/Google%20Play%20Billing%20Library-6.2.1-green.svg)](https://developer.android.com/google/play/billing/integrate)
-[![MIT license](https://img.shields.io/badge/License-MIT-yellowgreen.svg)](https://github.com/201949/godot-google-play-billing-6/blob/main/LICENSE)
+[![GPBL](https://img.shields.io/badge/Google%20Play%20Billing%20Library-7.1.0-green.svg)](https://developer.android.com/google/play/billing/integrate)
+[![MIT license](https://img.shields.io/badge/License-MIT-yellowgreen.svg)](https://github.com/201949/godot-google-play-billing-7/blob/main/LICENSE)
 
 ## Supported Features
 
@@ -36,7 +36,6 @@ A big thank you to the following people for their sponsorship:
 - ["Ugly Button 2"](https://play.google.com/store/apps/details?id=com.magikelle.uglybutton.chapter.two) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
 - ["Stunt Riders"](https://play.google.com/store/apps/details?id=com.magikelle.bikeriders) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
 - ["Lifty Circus Action Platformer"](https://play.google.com/store/apps/details?id=com.magikelle.liftycircus) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
-- ["Galaxius: Space Battle"](https://play.google.com/store/apps/details?id=com.justjustin.galaxius&hl=en_US) by [Galaxius Games](https://play.google.com/store/apps/dev?id=4953770330659300081&hl=en_US)
 
 
 ## Google Play Billing Library Version Deprecation Information
@@ -57,7 +56,7 @@ If there is no release for your Godot version, you will need to generate a new p
    from this: `compileOnly 'org.godotengine:godot:3.5.2.stable'`
 
    to this: `compileOnly fileTree(dir: '..', include: ['godot-lib*.aar'])`
-7. Open a command window (or terminal) and *cd* into the `godot-google-play-billing-6` directory, then run the appropriate command:
+7. Open a command window (or terminal) and *cd* into the `godot-google-play-billing-7` directory, then run the appropriate command:
 
     * Windows:
     
@@ -76,7 +75,7 @@ If there is no release for your Godot version, you will need to generate a new p
    
     Copy the newly created `.aar` and `.gdap` files to your plugin directory:
 
-    from `app/build/outputs/aar/GodotGooglePlayBilling-6.X.X-release.aar` to `[your godot project]/android/plugins/`
+    from `app/build/outputs/aar/GodotGooglePlayBilling-7.X.X-release.aar` to `[your godot project]/android/plugins/`
    
     and
    
@@ -86,17 +85,17 @@ After that, you will have a plugin for the Godot version you need.
 
 Don't forget to enable the plugin in Godot under your export settings!
 
-**Alternatively, you can download the precompiled plugin files for Godot 3.5.2 from the [releases page](https://github.com/201949/godot-google-play-billing-6/releases/tag/6.2.1_subs).**
+**Alternatively, you can download the precompiled plugin files for Godot 3.5.2 from the [releases page](https://github.com/201949/godot-google-play-billing-7/releases/tag/7.1.0_initial).**
 
 ## Preparing the Editor and Project for Plugin Use
 
-1. Check your Android export template settings. You need to specify a minimum SDK version of 21 and a target SDK version of 34 to meet the Google Play target platform requirements.
+1. Check your Android export template settings. You need to specify a minimum SDK version of 21 and a target SDK version of 35 to meet the Google Play target platform requirements.
 
-    ![Pic 01](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_01.png)
+    ![Pic 01](https://raw.githubusercontent.com/201949/godot-google-play-billing-7/main/pic_01.png)
 
 2. Check the `android/build/config.gradle` file and make any necessary changes to the SDK version specification.
 
-    ![Pic 02](https://raw.githubusercontent.com/201949/godot-google-play-billing-6/main/pic_02.png)
+    ![Pic 02](https://raw.githubusercontent.com/201949/godot-google-play-billing-7/main/pic_02.png)
 
 3. In the Android export template "Options" section under "Permissions", set "Access Network State" and "Internet" to "On". Also, add the following permission under "Custom Permissions": `com.android.vending.BILLING` (this may be required).
 
@@ -270,14 +269,4 @@ func pay(name_product):
 
 ## Upcoming Improvements
 
-I am actively working on making the plugin even more user-friendly. Here’s what I have planned:
-
-### Simplified Integration
-
-I plan to redesign the plugin so that users will only need to add a single class as a node in their project. This class will handle all billing operations and allow for configuration of items (one-time purchases, repeat purchases, and subscriptions) directly through exported variables.
-
-### Enhanced Configuration
-
-The new design will make it easier to specify purchase items and manage billing operations with minimal setup.
-
-Stay tuned for updates, and feel free to [open an issue](https://github.com/201949/godot-google-play-billing-6/issues) or [contribute](https://github.com/201949/godot-google-play-billing-6/pulls) if you have any suggestions or feedback!
+Stay tuned for updates, and feel free to [open an issue](https://github.com/201949/godot-google-play-billing-7/issues) or [contribute](https://github.com/201949/godot-google-play-billing-7/pulls) if you have any suggestions or feedback!

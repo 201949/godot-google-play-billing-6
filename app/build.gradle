@@ -3,16 +3,16 @@ plugins {
 }
 
 ext.libraryName = "GodotGooglePlayBilling"
-ext.libraryVersionCode = 2
-ext.libraryVersionName = "6.2.1"
+ext.libraryVersionCode = 3
+ext.libraryVersionName = "7.1.0"
 
 android {
     namespace 'com.magikelle.godotgoogleplaybilling'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         minSdk 21
-        targetSdk 34
+        targetSdk 35
         versionCode libraryVersionCode
         versionName libraryVersionName
     }
@@ -37,6 +37,6 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.android.billingclient:billing:6.2.1'
+    implementation 'com.android.billingclient:billing:7.1.0'
     compileOnly 'org.godotengine:godot:3.5.2.stable'
 }
