@@ -85,7 +85,7 @@ After that, you will have a plugin for the Godot version you need.
 
 Don't forget to enable the plugin in Godot under your export settings!
 
-**Alternatively, you can download the precompiled plugin files for Godot 3.5.2 from the [releases page](https://github.com/201949/godot-google-play-billing-7/releases/tag/7.1.0_initial).**
+**Alternatively, you can download the precompiled plugin files for Godot 3.5.2 from the [releases page](https://github.com/201949/godot-google-play-billing-7/releases/tag/7.1.0_init).**
 
 ## Preparing the Editor and Project for Plugin Use
 
