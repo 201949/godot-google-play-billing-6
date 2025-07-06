@@ -95,7 +95,7 @@ Don't forget to enable the plugin in Godot under your export settings!
 
 2. Check the `android/build/config.gradle` file and make any necessary changes to the SDK version specification.
 
-    ![Pic 02](https://raw.githubusercontent.com/201949/godot-google-play-billing-7/main/pic_02.png)
+    ![Pic 02](main/pic_02.png)
 
 3. In the Android export template "Options" section under "Permissions", set "Access Network State" and "Internet" to "On". Also, add the following permission under "Custom Permissions": `com.android.vending.BILLING` (this may be required).
 
