@@ -36,7 +36,7 @@ A big thank you to the following people for their sponsorship:
 - ["Ugly Button 2"](https://play.google.com/store/apps/details?id=com.magikelle.uglybutton.chapter.two) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
 - ["Stunt Riders"](https://play.google.com/store/apps/details?id=com.magikelle.bikeriders) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
 - ["Lifty Circus Action Platformer"](https://play.google.com/store/apps/details?id=com.magikelle.liftycircus) by [Magikelle Studio aka Ugly Button](https://play.google.com/store/apps/dev?id=8681639065134696403)
-
+- ["Galaxius: Space Battle"](https://play.google.com/store/apps/details?id=com.justjustin.galaxius&hl=en_US) **(GPBL 6.2.1)** by [Galaxius Games](https://play.google.com/store/apps/dev?id=4953770330659300081&hl=en_US)
 
 ## Google Play Billing Library Version Deprecation Information
 
